@@ -53,24 +53,33 @@ void _showNewTaskModal(BuildContext context) {
   );
 }
 
-class _NewTaskModal extends StatelessWidget {
+class _NewTaskModal extends StatefulWidget {
   _NewTaskModal({
-    super.key,
     required this.onTaskCreated,
   });
 
-  final _controller = TextEditingController();
   final void Function(Task task) onTaskCreated;
+
+  @override
+  State<_NewTaskModal> createState() => _NewTaskModalState();
+}
+
+class _NewTaskModalState extends State<_NewTaskModal> {
+  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 23),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(21)),
+        color: Colors.white,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const TitleCustom('Nueva tareas'),
+          const TitleCustom('Nueva tarea'),
           const SizedBox(height: 26),
           TextField(
             controller: _controller,
@@ -85,9 +94,9 @@ class _NewTaskModal extends StatelessWidget {
           const SizedBox(height: 26),
           ElevatedButton(
             onPressed: () {
-              if (_controller.text.isEmpty) {
+              if (_controller.text.isNotEmpty) {
                 final task = Task(_controller.text);
-                onTaskCreated(task);
+                widget.onTaskCreated(task);
                 Navigator.of(context).pop();
               }
             },

@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
               bodyColor: textColor,
               displayColor: textColor,
             ),
+        bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.transparent),    
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
           backgroundColor: primary,
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         )),
         useMaterial3: true,
       ),
-      home: SplashPage(),
+      home: const SplashPage(),
     );
   }
 }
